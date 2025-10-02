@@ -2,6 +2,9 @@
 
 A comprehensive SEO analysis tool that fetches website metadata, analyzes page content, and provides AI-powered SEO improvement recommendations. Built with Next.js, TypeScript, Cheerio for web scraping, and OpenAI for intelligent insights.
 
+https://github.com/user-attachments/assets/c0d18827-f3df-4ec5-aded-627cdb132636
+
+
 ## Features
 
 ### Core Functionality
