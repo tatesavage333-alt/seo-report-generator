@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model SeoReport {
+  id          String   @id @default(cuid())
+  url         String   // The analyzed URL
+  
+  // Scraped metadata
+  title       String?  // Page title
+  description String?  // Meta description
+  keywords    String?  // Meta keywords
+  headings    String?  // JSON array of headings (h1, h2, etc.)
+  metaTags    String?  // JSON object of all meta tags
+  
+  // AI analysis
+  aiAnalysis  String   // OpenAI generated SEO feedback
+  
+  // Basic SEO metrics
+  titleLength       Int?     // Length of title
+  descriptionLength Int?     // Length of description
+  hasTitle          Boolean  @default(false)
+  hasDescription    Boolean  @default(false)
+  hasKeywords       Boolean  @default(false)
+  hasH1             Boolean  @default(false)
+  
+  // Timestamps
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("seo_reports")
+}
+
+model AnalysisHistory {
+  id        String   @id @default(cuid())
+  url       String   // The URL that was analyzed
+  status    String   // success, error, pending
+  error     String?  // Error message if failed
+  createdAt DateTime @default(now())
+
+  @@map("analysis_history")
+}
